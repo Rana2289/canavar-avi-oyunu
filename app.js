@@ -1,1 +1,1 @@
-alert("test")
+alert("canavar oyununa hos geldiniz")
