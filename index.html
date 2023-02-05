@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+    <meta charset="UTF-8">
     <title>Canavar Avı</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="css/foundation.min.css">
@@ -27,97 +28,29 @@
             </div>
         </div>
     </section>
-    <section class="row controls">
+    <section class="row controls"  v-if=" !game_is_on" >
         <div class="small-12 columns">
             <button id="start-game" @click="start_game">YENİ OYUN</button>
         </div>
     </section>
-    <section class="row controls">
+    <section class="row controls"  v-if="game_is_on">
         <div class="small-12 columns">
-            <button id="attack" @click="attack">SALDİRİ</button>
-            <button id="special-attack" @click="special_attack">ÖZEL SALDİRİ</button>
-            <button id="heal"  @click="heal_up" >İLK YARDiM</button>
+            <button id="attack" @click="attack">SALDIRI</button>
+            <button id="special-attack" @click="special_attack">ÖZEL SALDIRI</button>
+            <button id="heal"  @click="heal_up" >İLK YARDIM</button>
             <button id="give-up"  @click="give_up">PES ET!</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="game_is_on">
         <div class="small-12 columns">
             <ul>
-                <li>
+                <li v-for="log in logs">{{ log }} </li>
 
-                </li>
             </ul>
         </div>
     </section>
 </div>
 
-<script>
-    new Vue({
-        el: "#app",
-        data :{
-            player_heal : 100,
-            monster_heal:100,
-            game_is_on :false,
-        },
-        methods:{
-            start_game :function (){
-                this.game_is_on=true;
-            },
-            attack :function (){
-                var sayi =Math.ceil(Math.random()*10);
-                this.monster_heal-=sayi;
-                this.monster_attack();
-
-
-            },
-            special_attack:function (){
-                var sayi =Math.ceil(Math.random()*25);
-                this.monster_heal-=sayi;
-                this.monster_attack();
-
-
-            },
-            heal_up:function (){
-                var sayi =Math.ceil(Math.random()*25);
-                this.player_heal+=sayi;
-                this.monster_attack();
-
-            },
-            give_up : function (){
-                this.player_heal=0;
-
-            },
-
-            monster_attack: function (){
-                var sayi =Math.ceil(Math.random()*15);
-                this.player_heal-=sayi;
-            },
-        },
-        watch :{
-            player_heal : function (value) {
-                if(value<=0){
-                    this.player_heal=0
-                    if(confirm("KAYBETTINIZ TEKRAR OYNAMAK ISTERMISINIZZ?")){
-                        this.player_heal= 100;
-                        this.monster_heal=100;
-                    }
-                }
-                else if(value>=100){
-                    this.player_heal=100
-                }
-            },
-            monster_heal : function ( value ){
-                if(value<=0){
-                    this.monster_heal=0
-                    if(confirm("KAZANDINIZ TEKRAR OYNAMAK ISTERMISINIZZ?")){
-                        this.player_heal= 100;
-                        this.monster_heal=100;
-                    }
-                }
-
-            }
-        }
-    })
-</script>
+<script src="app.js"></script>
 </body>
 </html>
