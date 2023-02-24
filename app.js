@@ -53,6 +53,7 @@ new Vue({
                 if(confirm("KAYBETTINIZ TEKRAR OYNAMAK ISTERMISINIZZ?")){
                     this.player_heal= 100;
                     this.monster_heal=100;
+                    this.logs = [];
                 }
             }
             else if(value>=100){
@@ -65,6 +66,7 @@ new Vue({
                 if(confirm("KAZANDINIZ TEKRAR OYNAMAK ISTERMISINIZZ?")){
                     this.player_heal= 100;
                     this.monster_heal=100;
+                    this.logs = [];
                 }
             }
 
